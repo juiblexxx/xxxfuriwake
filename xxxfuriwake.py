@@ -284,47 +284,46 @@ def check_system_path(source_path: str) -> bool:
 
 # カレントディレクトリを取得
 current_path = os.path.dirname(__file__)
-# messagebox.showinfo("カレント", current_path)
 
 # layout定義-------------------------------------------------------------------------------------------------------------------
-BUTTON_TAB1_EXECUTE = "-BUTTON_TAB1_EXECUTE-"
-TEXT_TAB1_DIRECTORY = "-TEXT_TAB1_DIRECTORY-"
+# sg.theme("Default")
+
+TAB1_BUTTON_EXECUTE = "-TAB1_BUTTON_EXECUTE-"
+TAB1_TEXT_DIRECTORY = "-TAB1_TEXT_DIRECTORY-"
 
 tab1_layout = [
     [sg.Text("ソースディレクトリ配下にあるファイルを\n"
              "全てソースディレクトリに移し「フラット」にします。\n"
              "サブフォルダ配下のファイルも全て移ります。\n"
              "システムディレクトリを指定すると死にます。")],
-    [sg.Text("ソース:"), sg.Input(current_path, key=TEXT_TAB1_DIRECTORY)],
+    [sg.Text("ソース:"), sg.Input(current_path, key=TAB1_TEXT_DIRECTORY)],
     [sg.Text("")],
     [sg.Text("")],
-    [sg.Button("実行", key=BUTTON_TAB1_EXECUTE, size=(20,2))],
+    [sg.Button("実行", key=TAB1_BUTTON_EXECUTE, size=(20,2))],
 ]
 
-
-BUTTON_TAB2_EXECUTE = "-BUTTON_TAB2_EXECUTE-"
-TEXT_TAB2_SOURCE_DIRECTORY = "-TEXT_TAB2_SOURCE_DIRECTORY-"
-TEXT_TAB2_FILESIZE = "-TEXT_TAB2_FILESIZE-"
-TEXT_TAB2_OUTPUT_DIRECTORY = "-TEXT_TAB2_OUTPUT_DIRECTORY-"
+TAB2_BUTTON_EXECUTE = "-TAB2_BUTTON_EXECUTE-"
+TAB2_TEXT_SOURCE_DIRECTORY = "-TAB2_TEXT_SOURCE_DIRECTORY-"
+TAB2_TEXT_FILESIZE = "-TAB2_TEXT_FILESIZE-"
+TAB2_TEXT_OUTPUT_DIRECTORY = "-TAB2_TEXT_OUTPUT_DIRECTORY-"
 
 tab2_layout = [
     [sg.Text("ソースディレクトリ配下にあるファイルを、\n"
              "指定されたファイルサイズ(Mb)以上なら\n"
              "出力先ディレクトリに移します。\n"
              "システムディレクトリを指定すると死にます。")],
-    [sg.Text("ソース:"), sg.Input(current_path, key=TEXT_TAB2_SOURCE_DIRECTORY)],
-    [sg.Text("サイズ(Mb):"), sg.Input("500", key=TEXT_TAB2_FILESIZE)],
-    [sg.Text("出力先:"), sg.Input(os.path.join(current_path, "big"), key=TEXT_TAB2_OUTPUT_DIRECTORY)],
-    [sg.Button("実行", key=BUTTON_TAB2_EXECUTE, size=(20,2))],
+    [sg.Text("ソース:"), sg.Input(current_path, key=TAB2_TEXT_SOURCE_DIRECTORY)],
+    [sg.Text("サイズ(Mb):"), sg.Input("500", key=TAB2_TEXT_FILESIZE)],
+    [sg.Text("出力先:"), sg.Input(os.path.join(current_path, "big"), key=TAB2_TEXT_OUTPUT_DIRECTORY)],
+    [sg.Button("実行", key=TAB2_BUTTON_EXECUTE, size=(20,2))],
 ]
 
-
-BUTTON_TAB3_EXECUTE = "-BUTTON_TAB3_EXECUTE-"
-TEXT_TAB3_SOURCE_DIRECTORY = "-TEXT_TAB3_SOURCE_DIRECTORY-"
-TEXT_TAB3_SUFFIX = "TEXT_TAB3_SUFFIX"
-CHECKBOX_TAB3_DAY = "-CHECKBOX_TAB3_DAY-"
-CHECKBOX_TAB3_MONTH = "-CHECKBOX_TAB3_MONTH-"
-CHECKBOX_TAB3_GID01 = "-CHECKBOX_TAB3_GID01-"
+TAB3_BUTTON_EXECUTE = "-TAB3_BUTTON_EXECUTE-"
+TAB3_TEXT_SOURCE_DIRECTORY = "-TAB3_TEXT_SOURCE_DIRECTORY-"
+TAB3_TEXT_SUFFIX = "-TAB3_TEXT_SUFFIX-"
+TAB3_CHECKBOX_DAY = "-TAB3_CHECKBOX_DAY-"
+TAB3_CHECKBOX_MONTH = "-TAB3_CHECKBOX_MONTH-"
+TAB3_CHECKBOX_GID01 = "-TAB3_CHECKBOX_GID01-"
 
 tab3_layout = [
     [sg.Text("ソースディレクトリ配下にあるファイルを、\n"
@@ -332,10 +331,10 @@ tab3_layout = [
              "チェックボックスの選択次第で日単位、月単位を選択可能。\n"
              "出力先フォルダ名の接尾語を追加できます。接尾語「_結婚式」→YYYY-MM-DD_結婚式\n"
              "サブディレクトリは見ないので、システムディレクトリを指定しても死にません。")],
-    [sg.Radio("YYYY-MM-DD", key=CHECKBOX_TAB3_DAY, group_id=CHECKBOX_TAB3_GID01), sg.Radio("YYYY-MM", key=CHECKBOX_TAB3_MONTH, group_id=CHECKBOX_TAB3_GID01, default=True)],
-    [sg.Text("接尾語:"), sg.Input("", key=TEXT_TAB3_SUFFIX)],
-    [sg.Text("ソース:"), sg.Input(current_path, key=TEXT_TAB3_SOURCE_DIRECTORY)],
-    [sg.Button("実行", key=BUTTON_TAB3_EXECUTE, size=(20,2))],
+    [sg.Radio("YYYY-MM-DD", key=TAB3_CHECKBOX_DAY, group_id=TAB3_CHECKBOX_GID01), sg.Radio("YYYY-MM", key=TAB3_CHECKBOX_MONTH, group_id=TAB3_CHECKBOX_GID01, default=True)],
+    [sg.Text("接尾語:"), sg.Input("", key=TAB3_TEXT_SUFFIX)],
+    [sg.Text("ソース:"), sg.Input(current_path, key=TAB3_TEXT_SOURCE_DIRECTORY)],
+    [sg.Button("実行", key=TAB3_BUTTON_EXECUTE, size=(20,2))],
 ]
 
 layout = [
@@ -346,7 +345,6 @@ layout = [
     ]])],
 ]
 
-
 # 表示ループ-------------------------------------------------------------------------------------------------------------------
 window = sg.Window('xxxfuriwake', layout)
 
@@ -356,33 +354,33 @@ while True:
     if event == sg.WIN_CLOSED:
         break
 
-    elif event == BUTTON_TAB1_EXECUTE:
+    elif event == TAB1_BUTTON_EXECUTE:
         # フラット化処理
-        if check_system_path(values[TEXT_TAB1_DIRECTORY]) == False:
+        if check_system_path(values[TAB1_TEXT_DIRECTORY]) == False:
             messagebox.showerror("中止", "システムフォルダでの実行はできません")
         else:
             if messagebox.askokcancel("確認", "実行してよろしいですか？"):
-                execute_files_to_flat(values[TEXT_TAB1_DIRECTORY])
+                execute_files_to_flat(values[TAB1_TEXT_DIRECTORY])
 
-    elif event == BUTTON_TAB2_EXECUTE:
+    elif event == TAB2_BUTTON_EXECUTE:
         # サイズ超過抽出処理
-        if check_system_path(values[TEXT_TAB2_SOURCE_DIRECTORY]) == False:
+        if check_system_path(values[TAB2_TEXT_SOURCE_DIRECTORY]) == False:
             messagebox.showerror("中止", "システムフォルダでの実行はできません")
         else:
             if messagebox.askokcancel("確認", "実行してよろしいですか？"):
-                execute_filesize_moving(values[TEXT_TAB2_SOURCE_DIRECTORY],values[TEXT_TAB2_FILESIZE],values[TEXT_TAB2_OUTPUT_DIRECTORY])
+                execute_filesize_moving(values[TAB2_TEXT_SOURCE_DIRECTORY],values[TAB2_TEXT_FILESIZE],values[TAB2_TEXT_OUTPUT_DIRECTORY])
 
-    elif event == BUTTON_TAB3_EXECUTE:
+    elif event == TAB3_BUTTON_EXECUTE:
         # 更新日振り分け処理
-        if check_system_path(values[TEXT_TAB3_SOURCE_DIRECTORY]) == False:
+        if check_system_path(values[TAB3_TEXT_SOURCE_DIRECTORY]) == False:
             messagebox.showerror("中止", "システムフォルダでの実行はできません")
         else:
             if messagebox.askokcancel("確認", "実行してよろしいですか？"):
                 date_flag = "day"
-                if values[CHECKBOX_TAB3_DAY]:
+                if values[TAB3_CHECKBOX_DAY]:
                     date_flag = "day"
-                elif values[CHECKBOX_TAB3_MONTH]:
+                elif values[TAB3_CHECKBOX_MONTH]:
                     date_flag = "month"
-                execute_filedate_moving(values[TEXT_TAB3_SOURCE_DIRECTORY], values[TEXT_TAB3_SUFFIX], date_flag)
+                execute_filedate_moving(values[TAB3_TEXT_SOURCE_DIRECTORY], values[TAB3_TEXT_SUFFIX], date_flag)
 
 window.close()
