@@ -22,8 +22,6 @@ import os
 import shutil
 import copy
 import datetime
-# import re
-# from typing import Tuple,List
 
 import PySimpleGUI as sg
 from tkinter import messagebox
