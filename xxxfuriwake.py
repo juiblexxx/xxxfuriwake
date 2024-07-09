@@ -330,8 +330,8 @@ tab3_layout = [
              "出力先フォルダ名の接尾語を追加できます。接尾語「_結婚式」→YYYY-MM-DD_結婚式\n"
              "サブディレクトリは見ないので、システムディレクトリを指定しても死にません。")],
     [sg.Radio("YYYY-MM-DD", key=TAB3_CHECKBOX_DAY, group_id=TAB3_CHECKBOX_GID01), sg.Radio("YYYY-MM", key=TAB3_CHECKBOX_MONTH, group_id=TAB3_CHECKBOX_GID01, default=True)],
-    [sg.Text("接尾語:"), sg.Input("", key=TAB3_TEXT_SUFFIX)],
     [sg.Text("ソース:"), sg.Input(current_path, key=TAB3_TEXT_SOURCE_DIRECTORY)],
+    [sg.Text("接尾語:"), sg.Input("", key=TAB3_TEXT_SUFFIX)],
     [sg.Button("実行", key=TAB3_BUTTON_EXECUTE, size=(20,2))],
 ]
 
